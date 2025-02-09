@@ -1,11 +1,13 @@
-"use client"
-
 import { useState } from "react"
 import { Eye, EyeOff } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 const AuthScreen = () => {
+  const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
   const [showPassword, setShowPassword] = useState(false)
+  const [emailInput, setEmailInput] = useState("")
+  const [passwordInput, setPasswordInput] = useState("")
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-slate-50 p-4">
@@ -16,7 +18,17 @@ const AuthScreen = () => {
             <h2 className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
               {isLogin ? "Login to Your Account" : "Create an Account"}
             </h2>
-            <form className="space-y-4">
+            <form
+              className="space-y-4"
+              onSubmit={(e) => {
+                e.preventDefault()
+                if (emailInput === "test@example.com" && passwordInput === "12345") {
+                  navigate("/dashboard")
+                } else {
+                  alert("Invalid credentials")
+                }
+              }}
+            >
               {!isLogin && (
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1">
@@ -39,6 +51,8 @@ const AuthScreen = () => {
                   id="email"
                   className="w-full px-4 py-2 bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50"
                   placeholder="Enter your email"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
                 />
               </div>
               <div>
@@ -51,6 +65,8 @@ const AuthScreen = () => {
                     id="password"
                     className="w-full px-4 py-2 bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50"
                     placeholder="Enter your password"
+                    value={passwordInput}
+                    onChange={(e) => setPasswordInput(e.target.value)}
                   />
                   <button
                     type="button"
