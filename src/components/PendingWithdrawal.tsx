@@ -1,6 +1,12 @@
-import { Clock, AlertCircle } from "lucide-react"
+import { Clock } from "lucide-react"
 
 const PendingWithdrawal = () => {
+  const pendingTransactions = [
+    { id: "TXN001", amount: "₹15,000", date: "2023-05-15", status: "Processing" },
+    { id: "TXN002", amount: "₹10,000", date: "2023-05-14", status: "Pending Approval" },
+    { id: "TXN003", amount: "₹7,000", date: "2023-05-13", status: "Processing" },
+  ]
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
@@ -16,23 +22,24 @@ const PendingWithdrawal = () => {
       <div className="bg-slate-800 p-6 rounded-lg">
         <h3 className="text-lg font-semibold text-slate-200 mb-4">Pending Transactions</h3>
         <div className="space-y-4">
-          {[
-            { id: "TXN001", amount: "₹15,000", date: "2023-05-15", status: "Processing" },
-            { id: "TXN002", amount: "₹10,000", date: "2023-05-14", status: "Pending Approval" },
-            { id: "TXN003", amount: "₹7,000", date: "2023-05-13", status: "Processing" },
-          ].map((transaction) => (
+          {pendingTransactions.map((transaction) => (
             <div key={transaction.id} className="flex items-center justify-between p-4 bg-slate-700 rounded-lg">
               <div>
                 <div className="text-slate-200 font-semibold">{transaction.amount}</div>
                 <div className="text-sm text-slate-400">{transaction.date}</div>
               </div>
               <div className="flex items-center">
-                <span className="text-amber-400 mr-2">{transaction.status}</span>
-                {transaction.status === "Processing" ? (
-                  <Clock className="w-5 h-5 text-amber-400" />
-                ) : (
-                  <AlertCircle className="w-5 h-5 text-amber-400" />
-                )}
+                <span
+                  className={`px-2 py-1 rounded-full text-xs ${
+                    transaction.status === "Processing"
+                      ? "bg-violet-400/10 text-violet-400"
+                      : transaction.status === "Pending Approval"
+                        ? "bg-amber-400/10 text-amber-400"
+                        : "bg-emerald-400/10 text-emerald-400"
+                  }`}
+                >
+                  {transaction.status}
+                </span>
               </div>
             </div>
           ))}

@@ -3,12 +3,12 @@
 import { useState } from "react"
 import { Search, Download, Filter } from "lucide-react"
 
-const Earnings = () => {
+const TransactionHistory = () => {
   const [filterType, setFilterType] = useState("all")
 
-  const earnings = [
+  const transactions = [
     {
-      id: "ERN001",
+      id: "TXN001",
       candidate: "Rahul Kumar",
       type: "Full-Time",
       company: "TechCorp India",
@@ -17,7 +17,7 @@ const Earnings = () => {
       date: "2024-02-05",
     },
     {
-      id: "ERN002",
+      id: "TXN002",
       candidate: "Priya Shah",
       type: "Gig Work",
       company: "DeliverEase",
@@ -26,7 +26,7 @@ const Earnings = () => {
       date: "2024-02-04",
     },
     {
-      id: "ERN003",
+      id: "TXN003",
       candidate: "Amit Patel",
       type: "Full-Time",
       company: "RetailPlus",
@@ -35,7 +35,7 @@ const Earnings = () => {
       date: "2024-02-03",
     },
     {
-      id: "ERN004",
+      id: "TXN004",
       candidate: "Sneha Reddy",
       type: "Full-Time",
       company: "CloudTech Solutions",
@@ -44,7 +44,7 @@ const Earnings = () => {
       date: "2024-02-02",
     },
     {
-      id: "ERN005",
+      id: "TXN005",
       candidate: "Karthik R",
       type: "Gig Work",
       company: "QuickServe",
@@ -59,7 +59,7 @@ const Earnings = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
-          Earnings
+          Transaction History
         </h1>
 
         <div className="flex items-center gap-4">
@@ -84,7 +84,7 @@ const Earnings = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search by candidate name, company, or earning ID..."
+                placeholder="Search by candidate name, company, or transaction ID..."
                 className="w-full pl-10 pr-4 py-2 bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50 placeholder-slate-400"
               />
             </div>
@@ -117,7 +117,7 @@ const Earnings = () => {
         </div>
       </div>
 
-      {/* Earnings Table */}
+      {/* Transactions Table */}
       <div className="group relative">
         <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-xl blur opacity-25"></div>
         <div className="relative bg-black/40 backdrop-blur-xl p-6 rounded-xl border border-slate-800">
@@ -135,25 +135,25 @@ const Earnings = () => {
                 </tr>
               </thead>
               <tbody className="text-sm">
-                {earnings.map((earning, index) => (
+                {transactions.map((transaction, index) => (
                   <tr key={index} className="border-t border-slate-800">
-                    <td className="py-4 text-slate-300">{earning.id}</td>
-                    <td className="py-4 text-slate-300">{earning.date}</td>
-                    <td className="py-4 text-slate-300">{earning.candidate}</td>
-                    <td className="py-4 text-slate-300">{earning.type}</td>
-                    <td className="py-4 text-slate-300">{earning.company}</td>
-                    <td className="py-4 text-slate-300">{earning.amount}</td>
+                    <td className="py-4 text-slate-300">{transaction.id}</td>
+                    <td className="py-4 text-slate-300">{transaction.date}</td>
+                    <td className="py-4 text-slate-300">{transaction.candidate}</td>
+                    <td className="py-4 text-slate-300">{transaction.type}</td>
+                    <td className="py-4 text-slate-300">{transaction.company}</td>
+                    <td className="py-4 text-slate-300">{transaction.amount}</td>
                     <td className="py-4">
                       <span
                         className={`px-2 py-1 rounded-full text-xs ${
-                          earning.status === "Paid"
+                          transaction.status === "Paid"
                             ? "bg-emerald-400/10 text-emerald-400"
-                            : earning.status === "Pending"
+                            : transaction.status === "Pending"
                               ? "bg-amber-400/10 text-amber-400"
                               : "bg-violet-400/10 text-violet-400"
                         }`}
                       >
-                        {earning.status}
+                        {transaction.status}
                       </span>
                     </td>
                   </tr>
@@ -166,7 +166,7 @@ const Earnings = () => {
 
       {/* Pagination */}
       <div className="flex justify-between items-center">
-        <div className="text-sm text-slate-400">Showing 5 of 25 earnings</div>
+        <div className="text-sm text-slate-400">Showing 5 of 25 transactions</div>
         <div className="flex gap-2">
           <button className="px-4 py-2 bg-black/50 border border-slate-800 rounded-lg hover:border-cyan-400 transition-colors text-slate-50">
             Previous
@@ -180,6 +180,5 @@ const Earnings = () => {
   )
 }
 
-export default Earnings
-
+export default TransactionHistory
 
