@@ -3,53 +3,53 @@
 import { useState } from "react"
 import { Search, Download, Filter } from "lucide-react"
 
-const Earnings = () => {
+const Candidates = () => {
   const [filterType, setFilterType] = useState("all")
 
-  const earnings = [
+  const candidates = [
     {
-      id: "ERN001",
-      candidate: "Rahul Kumar",
+      id: "CAN001",
+      name: "Rahul Kumar",
       type: "Full-Time",
       company: "TechCorp India",
-      amount: "₹15,000",
-      status: "Paid",
+      position: "Software Engineer",
+      status: "Placed",
       date: "2024-02-05",
     },
     {
-      id: "ERN002",
-      candidate: "Priya Shah",
+      id: "CAN002",
+      name: "Priya Shah",
       type: "Gig Work",
       company: "DeliverEase",
-      amount: "₹8,000",
-      status: "Pending",
+      position: "Delivery Executive",
+      status: "In Process",
       date: "2024-02-04",
     },
     {
-      id: "ERN003",
-      candidate: "Amit Patel",
+      id: "CAN003",
+      name: "Amit Patel",
       type: "Full-Time",
       company: "RetailPlus",
-      amount: "₹12,000",
-      status: "Processing",
+      position: "Store Manager",
+      status: "Interviewing",
       date: "2024-02-03",
     },
     {
-      id: "ERN004",
-      candidate: "Sneha Reddy",
+      id: "CAN004",
+      name: "Sneha Reddy",
       type: "Full-Time",
       company: "CloudTech Solutions",
-      amount: "₹18,000",
-      status: "Paid",
+      position: "Data Analyst",
+      status: "Placed",
       date: "2024-02-02",
     },
     {
-      id: "ERN005",
-      candidate: "Karthik R",
+      id: "CAN005",
+      name: "Karthik R",
       type: "Gig Work",
       company: "QuickServe",
-      amount: "₹6,500",
-      status: "Processing",
+      position: "Freelance Designer",
+      status: "In Process",
       date: "2024-02-01",
     },
   ]
@@ -59,7 +59,7 @@ const Earnings = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
-          Earnings
+          Candidates
         </h1>
 
         <div className="flex items-center gap-4">
@@ -84,7 +84,7 @@ const Earnings = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search by candidate name, company, or earning ID..."
+                placeholder="Search by candidate name, company, or position..."
                 className="w-full pl-10 pr-4 py-2 bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50 placeholder-slate-400"
               />
             </div>
@@ -103,9 +103,9 @@ const Earnings = () => {
 
               <select className="px-4 py-2 bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50">
                 <option>All Status</option>
-                <option>Paid</option>
-                <option>Pending</option>
-                <option>Processing</option>
+                <option>Placed</option>
+                <option>In Process</option>
+                <option>Interviewing</option>
               </select>
 
               <button className="px-4 py-2 bg-black/50 border border-slate-800 rounded-lg hover:border-cyan-400 transition-colors text-slate-50 flex items-center gap-2">
@@ -117,7 +117,7 @@ const Earnings = () => {
         </div>
       </div>
 
-      {/* Earnings Table */}
+      {/* Candidates Table */}
       <div className="group relative">
         <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-xl blur opacity-25"></div>
         <div className="relative bg-black/40 backdrop-blur-xl p-6 rounded-xl border border-slate-800">
@@ -127,33 +127,33 @@ const Earnings = () => {
                 <tr className="text-left">
                   <th className="pb-4 text-sm font-medium text-slate-400">ID</th>
                   <th className="pb-4 text-sm font-medium text-slate-400">Date</th>
-                  <th className="pb-4 text-sm font-medium text-slate-400">Candidate</th>
+                  <th className="pb-4 text-sm font-medium text-slate-400">Name</th>
                   <th className="pb-4 text-sm font-medium text-slate-400">Type</th>
                   <th className="pb-4 text-sm font-medium text-slate-400">Company</th>
-                  <th className="pb-4 text-sm font-medium text-slate-400">Amount</th>
+                  <th className="pb-4 text-sm font-medium text-slate-400">Position</th>
                   <th className="pb-4 text-sm font-medium text-slate-400">Status</th>
                 </tr>
               </thead>
               <tbody className="text-sm">
-                {earnings.map((earning, index) => (
+                {candidates.map((candidate, index) => (
                   <tr key={index} className="border-t border-slate-800">
-                    <td className="py-4 text-slate-300">{earning.id}</td>
-                    <td className="py-4 text-slate-300">{earning.date}</td>
-                    <td className="py-4 text-slate-300">{earning.candidate}</td>
-                    <td className="py-4 text-slate-300">{earning.type}</td>
-                    <td className="py-4 text-slate-300">{earning.company}</td>
-                    <td className="py-4 text-slate-300">{earning.amount}</td>
+                    <td className="py-4 text-slate-300">{candidate.id}</td>
+                    <td className="py-4 text-slate-300">{candidate.date}</td>
+                    <td className="py-4 text-slate-300">{candidate.name}</td>
+                    <td className="py-4 text-slate-300">{candidate.type}</td>
+                    <td className="py-4 text-slate-300">{candidate.company}</td>
+                    <td className="py-4 text-slate-300">{candidate.position}</td>
                     <td className="py-4">
                       <span
                         className={`px-2 py-1 rounded-full text-xs ${
-                          earning.status === "Paid"
+                          candidate.status === "Placed"
                             ? "bg-emerald-400/10 text-emerald-400"
-                            : earning.status === "Pending"
+                            : candidate.status === "In Process"
                               ? "bg-amber-400/10 text-amber-400"
                               : "bg-violet-400/10 text-violet-400"
                         }`}
                       >
-                        {earning.status}
+                        {candidate.status}
                       </span>
                     </td>
                   </tr>
@@ -166,7 +166,7 @@ const Earnings = () => {
 
       {/* Pagination */}
       <div className="flex justify-between items-center">
-        <div className="text-sm text-slate-400">Showing 5 of 25 earnings</div>
+        <div className="text-sm text-slate-400">Showing 5 of 25 candidates</div>
         <div className="flex gap-2">
           <button className="px-4 py-2 bg-black/50 border border-slate-800 rounded-lg hover:border-cyan-400 transition-colors text-slate-50">
             Previous
@@ -180,5 +180,5 @@ const Earnings = () => {
   )
 }
 
-export default Earnings
+export default Candidates
 
