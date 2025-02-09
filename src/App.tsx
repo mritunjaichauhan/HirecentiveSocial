@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import AuthScreen from "./components/AuthScreen"
 import DashboardLayout from "./components/DashboardLayout"
 import DashboardOverview from "./components/DashboardOverview"
-// import TransactionHistory from "./components/TransactionHistory"
+import TransactionHistory from "./components/TransactionHistory"
 import Candidates from "./components/Candidates"
 import Earnings from "./components/Earnings"
 import Settings from "./components/Settings"
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/login" element={<AuthScreen />} />
         <Route path="dashboard" element={<DashboardLayout />}>
           <Route index element={<DashboardOverview />} />
-          {/* <Route path="transactions" element={<TransactionHistory />} /> */}
+          <Route path="transactions" element={<TransactionHistory />} /> */}
           <Route path="candidates" element={<Candidates />} />
           <Route path="earnings" element={<Earnings />} />
           <Route path="settings" element={<Settings />} />
