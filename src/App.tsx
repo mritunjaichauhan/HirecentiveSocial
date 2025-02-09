@@ -1,6 +1,6 @@
 "use client"
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
-// import AuthScreen from "./components/AuthScreen"
+import AuthScreen from "./components/AuthScreen"
 import DashboardLayout from "./components/DashboardLayout"
 import DashboardOverview from "./components/DashboardOverview"
 // import TransactionHistory from "./components/TransactionHistory"
