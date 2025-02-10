@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Link, Outlet, useLocation } from "react-router-dom"
-import { LayoutDashboard, Users, Wallet, FileText, Settings, Bell, Menu, X } from "lucide-react"
+import { LayoutDashboard, Users, Wallet, FileText, Settings, Bell, Menu, X, Share2 } from "lucide-react"
 
 const DashboardLayout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -48,18 +48,20 @@ const DashboardLayout = () => {
 
           {/* Profile */}
           <div className="p-4 border-t border-slate-800">
-            <div className="group relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25"></div>
-              <div className="relative p-4 bg-slate-900 rounded-lg">
-                <div className="flex items-center">
-                  <img src="/api/placeholder/40/40" alt="Profile" className="w-10 h-10 rounded-full" />
-                  <div className="ml-3">
-                    <div className="text-sm font-medium">Sarah Chen</div>
-                    <div className="text-xs text-slate-400">Tech Influencer</div>
-                  </div>
+            <Link to="/dashboard/profile" className="group relative block">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity"></div>
+              <div className="relative p-4 bg-slate-900 rounded-lg flex items-center">
+                <img
+                  src="https://i.pravatar.cc/100?img=47"
+                  alt="Sarah Chen"
+                  className="w-10 h-10 rounded-full border-2 border-cyan-400"
+                />
+                <div className="ml-3">
+                  <div className="text-sm font-medium text-slate-200">Sarah Chen</div>
+                  <div className="text-xs text-slate-400">Tech Influencer</div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </aside>
@@ -86,19 +88,18 @@ const DashboardLayout = () => {
 
             <div className="flex items-center gap-4">
               {/* Notifications */}
-              <button className="relative p-2 text-slate-400 hover:text-cyan-400 transition-colors">
+              <Link
+                to="/dashboard/notifications"
+                className="relative p-2 text-slate-400 hover:text-cyan-400 transition-colors"
+              >
                 <Bell className="w-6 h-6" />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-cyan-400 rounded-full"></span>
-              </button>
+              </Link>
 
-              {/* Quick actions */}
-              <button className="group relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg opacity-75"></div>
-                <div className="absolute inset-0.5 bg-black rounded-lg"></div>
-                <span className="relative z-10 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
-                  Share My Link
-                </span>
-              </button>
+              {/* Share */}
+              <Link to="/dashboard/share" className="p-2 text-slate-400 hover:text-cyan-400 transition-colors">
+                <Share2 className="w-6 h-6" />
+              </Link>
             </div>
           </div>
         </div>
