@@ -138,7 +138,9 @@ const AuthScreen = () => {
       </div>
     </div>
   )
+  
 }
+
 
 export default AuthScreen
 
