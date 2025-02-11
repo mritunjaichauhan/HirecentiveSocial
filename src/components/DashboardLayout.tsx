@@ -2,10 +2,24 @@
 
 import { useState } from "react"
 import { Link, Outlet, useLocation } from "react-router-dom"
-import { LayoutDashboard, Users, Wallet, FileText, Settings, Bell, Menu, X, Share2 } from "lucide-react"
+import {
+  LayoutDashboard,
+  Users,
+  Wallet,
+  FileText,
+  Settings,
+  Bell,
+  Menu,
+  X,
+  Share2,
+  FolderOpen,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react"
 
 const DashboardLayout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const location = useLocation()
 
   const navigation = [
@@ -14,19 +28,24 @@ const DashboardLayout = () => {
     { name: "Earnings", icon: Wallet, href: "/dashboard/earnings" },
     { name: "Transactions", icon: FileText, href: "/dashboard/transactions" },
     { name: "Settings", icon: Settings, href: "/dashboard/settings" },
+    { name: "Repository", icon: FolderOpen, href: "/dashboard/repository" },
   ]
 
   return (
     <div className="min-h-screen bg-black text-slate-50">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900/95 backdrop-blur-xl transform transition-transform duration-300 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+        className={`fixed inset-y-0 left-0 z-50 ${
+          isSidebarCollapsed ? "w-20" : "w-64"
+        } bg-slate-900/95 backdrop-blur-xl transform transition-all duration-300 ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
       >
         <div className="h-full flex flex-col border-r border-slate-800">
           {/* Logo */}
           <div className="p-6">
             <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
-              Hirecentive
+              HC Social
             </div>
           </div>
 
@@ -41,7 +60,7 @@ const DashboardLayout = () => {
                 }`}
               >
                 <item.icon className="w-5 h-5 mr-3 text-slate-400 group-hover:text-cyan-400" />
-                {item.name}
+                {!isSidebarCollapsed && item.name}
               </Link>
             ))}
           </nav>
@@ -56,13 +75,21 @@ const DashboardLayout = () => {
                   alt="Sarah Chen"
                   className="w-10 h-10 rounded-full border-2 border-cyan-400"
                 />
-                <div className="ml-3">
-                  <div className="text-sm font-medium text-slate-200">Sarah Chen</div>
-                  <div className="text-xs text-slate-400">Tech Influencer</div>
-                </div>
+                {!isSidebarCollapsed && (
+                  <div className="ml-3">
+                    <div className="text-sm font-medium text-slate-200">Sarah Chen</div>
+                    <div className="text-xs text-slate-400">Tech Influencer</div>
+                  </div>
+                )}
               </div>
             </Link>
           </div>
+          <button
+            onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+            className="absolute bottom-4 right-4 p-2 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors"
+          >
+            {isSidebarCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+          </button>
         </div>
       </aside>
 

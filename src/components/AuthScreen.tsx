@@ -6,10 +6,12 @@ import { ArrowRight } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 const AuthScreen = () => {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [otp, setOtp] = useState("")
+  const [otpArray, setOtpArray] = useState(Array(6).fill(""))
   const [step, setStep] = useState("email") // 'email' or 'otp'
-  const navigate = useNavigate()
+  const [combinedOtp, setCombinedOtp] = useState("")
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -17,9 +19,44 @@ const AuthScreen = () => {
     setStep("otp")
   }
 
+  const handleOtpChange = (index: number, value: string) => {
+    const newOtpArray = [...otpArray]
+    newOtpArray[index] = value
+    setOtpArray(newOtpArray)
+    
+    // Combine OTP digits
+    const newCombinedOtp = newOtpArray.join("")
+    setCombinedOtp(newCombinedOtp)
+
+    // Auto-focus next input
+    if (value && index < 5) {
+      const nextInput = document.querySelector(`input[name=otp-${index + 1}]`) as HTMLInputElement
+      if (nextInput) nextInput.focus()
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (e.key === "Backspace") {
+      e.preventDefault()
+      const newOtpArray = [...otpArray]
+      newOtpArray[index] = ""
+      setOtpArray(newOtpArray)
+      setCombinedOtp(newOtpArray.join(""))
+
+      // Focus previous input on backspace
+      if (index > 0) {
+        const prevInput = document.querySelector(`input[name=otp-${index - 1}]`) as HTMLInputElement
+        if (prevInput) {
+          prevInput.focus()
+          prevInput.select()
+        }
+      }
+    }
+  }
+
   const handleOtpSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (otp === "12345") {
+    if (combinedOtp === "123456") {
       navigate("/dashboard")
     } else {
       alert("Invalid OTP")
@@ -65,15 +102,20 @@ const AuthScreen = () => {
                   <label htmlFor="otp" className="block text-sm font-medium text-slate-300 mb-1">
                     One-Time Password
                   </label>
-                  <input
-                    type="text"
-                    id="otp"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    className="w-full px-4 py-2 bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50"
-                    placeholder="Enter OTP"
-                    required
-                  />
+                  <div className="flex justify-between">
+                    {[...Array(6)].map((_, index) => (
+                      <input
+                        key={index}
+                        name={`otp-${index}`}
+                        type="text"
+                        maxLength={1}
+                        value={otpArray[index]}
+                        className="w-12 h-12 text-center bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50 text-xl"
+                        onChange={(e) => handleOtpChange(index, e.target.value)}
+                        onKeyDown={(e) => handleKeyDown(e, index)}
+                      />
+                    ))}
+                  </div>
                 </div>
                 <button
                   type="submit"

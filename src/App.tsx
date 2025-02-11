@@ -23,6 +23,7 @@ import NotificationSettings from "./components/settings/NotificationSettings"
 import PrivacySettings from "./components/settings/PrivacySettings"
 import BillingSettings from "./components/settings/BillingSettings"
 import SupportSettings from "./components/settings/SupportSettings"
+import Repository from "./components/Repository"
 
 const App = () => {
   return (
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="notifications" element={<NotificationsPage />} />
           <Route path="share" element={<SharePage />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="repository" element={<Repository />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
