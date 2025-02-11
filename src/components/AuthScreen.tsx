@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom"
 const AuthScreen = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
-  const [otp, setOtp] = useState("")
   const [otpArray, setOtpArray] = useState(Array(6).fill(""))
   const [step, setStep] = useState("email") // 'email' or 'otp'
   const [combinedOtp, setCombinedOtp] = useState("")
