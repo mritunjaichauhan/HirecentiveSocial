@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link, Outlet, useLocation } from "react-router-dom"
 import {
   LayoutDashboard,
@@ -31,36 +31,66 @@ const DashboardLayout = () => {
     { name: "Repository", icon: FolderOpen, href: "/dashboard/repository" },
   ]
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-black text-slate-50">
+    <div className="min-h-screen bg-black text-slate-50 flex">
       {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 ${
-          isSidebarCollapsed ? "w-20" : "w-64"
+          isSidebarCollapsed ? "w-16" : "w-64"
         } bg-slate-900/95 backdrop-blur-xl transform transition-all duration-300 ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
         <div className="h-full flex flex-col border-r border-slate-800">
-          {/* Logo */}
-          <div className="p-6">
-            <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text">
-              HC Social
+          {/* Logo and collapse button */}
+          <div className="p-4 flex items-center justify-between">
+            <div
+              className={`text-2xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text ${isSidebarCollapsed ? "hidden" : "block"}`}
+            >
+              HireCentive Social
             </div>
+            <div
+              className={`text-2xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text ${isSidebarCollapsed ? "block" : "hidden"}`}
+            >
+              HC
+            </div>
+            <button
+              onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+              className="p-2 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors"
+            >
+              {isSidebarCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+            </button>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
+          <nav className="flex-1 px-2 space-y-1 overflow-y-auto">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`group flex items-center px-4 py-3 text-slate-300 rounded-lg hover:bg-slate-800/50 transition-colors ${
-                  location.pathname === item.href ? "bg-slate-800/50" : ""
+                className={`group flex items-center px-2 py-2 text-sm font-medium rounded-md ${
+                  location.pathname === item.href
+                    ? "bg-slate-800 text-white"
+                    : "text-slate-300 hover:bg-slate-700 hover:text-white"
                 }`}
               >
-                <item.icon className="w-5 h-5 mr-3 text-slate-400 group-hover:text-cyan-400" />
-                {!isSidebarCollapsed && item.name}
+                <item.icon
+                  className={`${
+                    location.pathname === item.href ? "text-slate-300" : "text-slate-400 group-hover:text-slate-300"
+                  } mr-3 flex-shrink-0 h-6 w-6`}
+                />
+                {!isSidebarCollapsed && <span>{item.name}</span>}
               </Link>
             ))}
           </nav>
@@ -69,11 +99,11 @@ const DashboardLayout = () => {
           <div className="p-4 border-t border-slate-800">
             <Link to="/dashboard/profile" className="group relative block">
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity"></div>
-              <div className="relative p-4 bg-slate-900 rounded-lg flex items-center">
+              <div className="relative p-2 bg-slate-900 rounded-lg flex items-center">
                 <img
                   src="https://i.pravatar.cc/100?img=47"
                   alt="Sarah Chen"
-                  className="w-10 h-10 rounded-full border-2 border-cyan-400"
+                  className={`w-10 h-10 rounded-full border-2 border-cyan-400 ${isSidebarCollapsed ? "w-8 h-8" : ""}`}
                 />
                 {!isSidebarCollapsed && (
                   <div className="ml-3">
@@ -84,12 +114,6 @@ const DashboardLayout = () => {
               </div>
             </Link>
           </div>
-          <button
-            onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-            className="absolute bottom-4 right-4 p-2 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors"
-          >
-            {isSidebarCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
-          </button>
         </div>
       </aside>
 
@@ -105,7 +129,7 @@ const DashboardLayout = () => {
       </div>
 
       {/* Main content */}
-      <main className="md:pl-64">
+      <main className={`flex-1 transition-all duration-300 ${isSidebarCollapsed ? "md:ml-16" : "md:ml-64"}`}>
         {/* Top bar */}
         <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-xl border-b border-slate-800">
           <div className="flex items-center justify-between h-16 px-6">
