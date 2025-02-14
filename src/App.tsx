@@ -24,12 +24,15 @@ import PrivacySettings from "./components/settings/PrivacySettings"
 import BillingSettings from "./components/settings/BillingSettings"
 import SupportSettings from "./components/settings/SupportSettings"
 import Repository from "./components/Repository"
+import Registration from "./components/Registration"
+import PDFViewer from "./components/PDFViewer"
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<AuthScreen />} />
+        <Route path="/register" element={<Registration />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<DashboardOverview />} />
           <Route path="transactions" element={<TransactionHistory />} />
@@ -53,6 +56,8 @@ const App = () => {
           <Route path="profile" element={<ProfilePage />} />
           <Route path="repository" element={<Repository />} />
         </Route>
+        <Route path="/terms.pdf" element={<PDFViewer url="/terms.pdf" />} />
+        <Route path="/privacy.pdf" element={<PDFViewer url="/privacy.pdf" />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>

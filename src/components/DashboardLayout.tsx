@@ -58,12 +58,12 @@ const DashboardLayout = () => {
             <div
               className={`text-2xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text ${isSidebarCollapsed ? "hidden" : "block"}`}
             >
-              HireCentive Social
+              Hirecentive Social
             </div>
             <div
               className={`text-2xl font-bold bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 text-transparent bg-clip-text ${isSidebarCollapsed ? "block" : "hidden"}`}
             >
-              HC
+              Hc
             </div>
             <button
               onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
@@ -100,11 +100,9 @@ const DashboardLayout = () => {
             <Link to="/dashboard/profile" className="group relative block">
               <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity"></div>
               <div className="relative p-2 bg-slate-900 rounded-lg flex items-center">
-                <img
-                  src="https://i.pravatar.cc/100?img=47"
-                  alt="Sarah Chen"
-                  className={`w-10 h-10 rounded-full border-2 border-cyan-400 ${isSidebarCollapsed ? "w-8 h-8" : ""}`}
-                />
+                <div className={`w-10 h-10 rounded-full border-2 border-cyan-400 overflow-hidden flex-shrink-0`}>
+                  <img src="https://i.pravatar.cc/100?img=47" alt="Sarah Chen" className="w-full h-full object-cover" />
+                </div>
                 {!isSidebarCollapsed && (
                   <div className="ml-3">
                     <div className="text-sm font-medium text-slate-200">Sarah Chen</div>

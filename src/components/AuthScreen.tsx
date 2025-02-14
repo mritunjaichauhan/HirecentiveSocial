@@ -3,14 +3,13 @@
 import type React from "react"
 import { useState } from "react"
 import { ArrowRight } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 const AuthScreen = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
-  const [otpArray, setOtpArray] = useState(Array(6).fill(""))
+  const [otp, setOtp] = useState("")
   const [step, setStep] = useState("email") // 'email' or 'otp'
-  const [combinedOtp, setCombinedOtp] = useState("")
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -18,44 +17,9 @@ const AuthScreen = () => {
     setStep("otp")
   }
 
-  const handleOtpChange = (index: number, value: string) => {
-    const newOtpArray = [...otpArray]
-    newOtpArray[index] = value
-    setOtpArray(newOtpArray)
-    
-    // Combine OTP digits
-    const newCombinedOtp = newOtpArray.join("")
-    setCombinedOtp(newCombinedOtp)
-
-    // Auto-focus next input
-    if (value && index < 5) {
-      const nextInput = document.querySelector(`input[name=otp-${index + 1}]`) as HTMLInputElement
-      if (nextInput) nextInput.focus()
-    }
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-    if (e.key === "Backspace") {
-      e.preventDefault()
-      const newOtpArray = [...otpArray]
-      newOtpArray[index] = ""
-      setOtpArray(newOtpArray)
-      setCombinedOtp(newOtpArray.join(""))
-
-      // Focus previous input on backspace
-      if (index > 0) {
-        const prevInput = document.querySelector(`input[name=otp-${index - 1}]`) as HTMLInputElement
-        if (prevInput) {
-          prevInput.focus()
-          prevInput.select()
-        }
-      }
-    }
-  }
-
   const handleOtpSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (combinedOtp === "123456") {
+    if (otp === "123456") {
       navigate("/dashboard")
     } else {
       alert("Invalid OTP")
@@ -105,13 +69,20 @@ const AuthScreen = () => {
                     {[...Array(6)].map((_, index) => (
                       <input
                         key={index}
-                        name={`otp-${index}`}
                         type="text"
                         maxLength={1}
-                        value={otpArray[index]}
                         className="w-12 h-12 text-center bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50 text-xl"
-                        onChange={(e) => handleOtpChange(index, e.target.value)}
-                        onKeyDown={(e) => handleKeyDown(e, index)}
+                        onChange={(e) => {
+                          const value = e.target.value
+                          if (value.length === 1 && index < 5) {
+                            ;(e.target.nextSibling as HTMLInputElement)?.focus()
+                          }
+                          setOtp((prev) => {
+                            const newOtp = prev.split("")
+                            newOtp[index] = value
+                            return newOtp.join("")
+                          })
+                        }}
                       />
                     ))}
                   </div>
@@ -133,14 +104,17 @@ const AuthScreen = () => {
                 </button>
               </p>
             )}
+            <div className="mt-4 text-center">
+              <Link to="/register" className="text-cyan-400 hover:underline">
+                Create an account
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </div>
   )
-  
 }
-
 
 export default AuthScreen
 
