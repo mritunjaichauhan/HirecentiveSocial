@@ -107,26 +107,26 @@ const Registration = () => {
                 <label htmlFor="agreeTerms" className="text-sm text-slate-300">
                   I have read and understood the{" "}
                   <a
-                    href="/terms.pdf"
+                    href="https://drive.google.com/file/d/1hGVi94dwjJ9C7mFgvBHk5b2IlYVT4NW7/view?usp=drive_link"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-cyan-400 hover:underline"
                     onClick={(e) => {
                       e.preventDefault()
-                      window.open("/terms.pdf", "_blank", "noopener,noreferrer")
+                      window.open("https://drive.google.com/file/d/1hGVi94dwjJ9C7mFgvBHk5b2IlYVT4NW7/view?usp=drive_link", "_blank")
                     }}
                   >
                     Terms & Conditions
                   </a>{" "}
                   and the{" "}
                   <a
-                    href="/privacy.pdf"
+                    href="https://drive.google.com/file/d/18kcW2hdO-gd8KZ2HXnD3KBIFrCiWh9Z_/view?usp=drive_link"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-cyan-400 hover:underline"
                     onClick={(e) => {
                       e.preventDefault()
-                      window.open("/privacy.pdf", "_blank", "noopener,noreferrer")
+                      window.open("https://drive.google.com/file/d/18kcW2hdO-gd8KZ2HXnD3KBIFrCiWh9Z_/view?usp=drive_link", "_blank")
                     }}
                   >
                     Privacy Policy
