@@ -26,6 +26,38 @@ const AuthScreen = () => {
     }
   }
 
+  const handleOtpChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const value = e.target.value
+    setOtp((prev) => {
+      const newOtp = prev.split("")
+      newOtp[index] = value.slice(-1)
+      return newOtp.join("")
+    })
+
+    // Auto-focus next input when typing
+    if (value && index < 5) {
+      const nextInput = document.querySelector(`input[data-index="${index + 1}"]`) as HTMLInputElement
+      if (nextInput) nextInput.focus()
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (e.key === "Backspace") {
+      e.preventDefault()
+      setOtp((prev) => {
+        const newOtp = prev.split("")
+        newOtp[index] = ""
+        return newOtp.join("")
+      })
+
+      // Focus previous input on backspace
+      if (index > 0) {
+        const prevInput = document.querySelector(`input[data-index="${index - 1}"]`) as HTMLInputElement
+        if (prevInput) prevInput.focus()
+      }
+    }
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-slate-50 p-4">
       <div className="w-full max-w-md">
@@ -69,20 +101,13 @@ const AuthScreen = () => {
                     {[...Array(6)].map((_, index) => (
                       <input
                         key={index}
+                        data-index={index}
                         type="text"
                         maxLength={1}
+                        value={otp[index] || ""}
                         className="w-12 h-12 text-center bg-black/50 border border-slate-800 rounded-lg focus:outline-none focus:border-cyan-400 transition-colors text-slate-50 text-xl"
-                        onChange={(e) => {
-                          const value = e.target.value
-                          if (value.length === 1 && index < 5) {
-                            ;(e.target.nextSibling as HTMLInputElement)?.focus()
-                          }
-                          setOtp((prev) => {
-                            const newOtp = prev.split("")
-                            newOtp[index] = value
-                            return newOtp.join("")
-                          })
-                        }}
+                        onChange={(e) => handleOtpChange(e, index)}
+                        onKeyDown={(e) => handleKeyDown(e, index)}
                       />
                     ))}
                   </div>
