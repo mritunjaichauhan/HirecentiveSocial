@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Users, Briefcase, IndianRupee, Wallet, Clock, Building2 } from "lucide-react"
+import { Users, Briefcase, IndianRupee, Wallet, Clock, Building2, Copy } from "lucide-react"
 
 const DashboardOverview = () => {
   const earnings = [
@@ -57,21 +57,35 @@ const DashboardOverview = () => {
     },
   ]
 
+  const copyReferralLink = () => {
+    navigator.clipboard.writeText("https://hirecentive.com/ref/sarahchen")
+    alert("Referral link copied to clipboard!")
+  }
+
   return (
     <div className="space-y-8">
       {/* Profile Section */}
-      <section className="flex items-center space-x-4">
-        <img
-          src="https://i.pravatar.cc/100?img=47"
-          alt="Sarah Chen"
-          className="w-16 h-16 rounded-full border-2 border-cyan-400"
-        />
-        <div>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
-            Welcome back, Sarah Chen
-          </h2>
-          <p className="text-slate-400">Tech Influencer</p>
+      <section className="flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <img
+            src="https://i.pravatar.cc/100?img=47"
+            alt="Sarah Chen"
+            className="w-16 h-16 rounded-full border-2 border-cyan-400"
+          />
+          <div>
+            <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
+              Welcome back, Sarah Chen
+            </h2>
+            <p className="text-slate-400">Tech Influencer</p>
+          </div>
         </div>
+        <button
+          onClick={copyReferralLink}
+          className="px-4 py-2 bg-gradient-to-r from-cyan-400 to-violet-500 rounded-lg text-slate-50 font-medium hover:from-cyan-500 hover:to-violet-600 transition-colors flex items-center"
+        >
+          <Copy className="w-4 h-4 mr-2" />
+          Copy Referral Link
+        </button>
       </section>
       {/* Earnings Section */}
       <section>

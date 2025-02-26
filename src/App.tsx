@@ -56,8 +56,8 @@ const App = () => {
           <Route path="profile" element={<ProfilePage />} />
           <Route path="repository" element={<Repository />} />
         </Route>
-        <Route path="/pdfs/terms.pdf" element={<PDFViewer url="/pdfs/terms.pdf" />} />
-        <Route path="/pdfs/privacy.pdf" element={<PDFViewer url="/pdfs/privacy.pdf" />} />
+        <Route path="/terms.pdf" element={<PDFViewer url="/terms.pdf" />} />
+        <Route path="/privacy.pdf" element={<PDFViewer url="/privacy.pdf" />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>

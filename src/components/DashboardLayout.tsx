@@ -96,10 +96,10 @@ const DashboardLayout = () => {
           </nav>
 
           {/* Profile */}
-          <div className="p-4 border-t border-slate-800">
+          <div className={`p-4 border-t border-slate-800 ${isSidebarCollapsed ? "flex justify-center" : ""}`}>
             <Link to="/dashboard/profile" className="group relative block">
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-lg blur opacity-25 group-hover:opacity-50 transition-opacity"></div>
-              <div className="relative p-2 bg-slate-900 rounded-lg flex items-center">
+              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 via-violet-500 to-amber-400 rounded-full blur opacity-25 group-hover:opacity-50 transition-opacity"></div>
+              <div className={`relative ${isSidebarCollapsed ? "" : "p-2 bg-slate-900 rounded-lg"} flex items-center`}>
                 <div className={`w-10 h-10 rounded-full border-2 border-cyan-400 overflow-hidden flex-shrink-0`}>
                   <img src="https://i.pravatar.cc/100?img=47" alt="Sarah Chen" className="w-full h-full object-cover" />
                 </div>

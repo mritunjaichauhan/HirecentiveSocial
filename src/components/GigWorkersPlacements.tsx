@@ -1,6 +1,23 @@
+"use client"
+
+import { useState } from "react"
 import { Users, TrendingUp, Briefcase } from "lucide-react"
 
 const GigWorkersPlacements = () => {
+  const [selectedFilter, setSelectedFilter] = useState("all")
+
+  const filters = [
+    { value: "today", label: "Today" },
+    { value: "7days", label: "7 Days" },
+    { value: "1month", label: "1 Month" },
+    { value: "2months", label: "2 Months" },
+    { value: "6months", label: "6 Months" },
+    { value: "1year", label: "1 Year" },
+    { value: "3years", label: "3 Years" },
+    { value: "5years", label: "5 Years" },
+    { value: "all", label: "All Time" },
+  ]
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-violet-500 text-transparent bg-clip-text">
@@ -42,6 +59,22 @@ const GigWorkersPlacements = () => {
             </div>
           ))}
         </div>
+      </div>
+      {/* Filter Bar */}
+      <div className="flex justify-center space-x-2 overflow-x-auto pb-2">
+        {filters.map((filter) => (
+          <button
+            key={filter.value}
+            onClick={() => setSelectedFilter(filter.value)}
+            className={`px-3 py-1 rounded-full text-sm ${
+              selectedFilter === filter.value
+                ? "bg-gradient-to-r from-cyan-400 to-violet-500 text-white"
+                : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+            }`}
+          >
+            {filter.label}
+          </button>
+        ))}
       </div>
     </div>
   )
