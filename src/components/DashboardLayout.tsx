@@ -15,12 +15,15 @@ import {
   FolderOpen,
   ChevronLeft,
   ChevronRight,
+  LogOut, // Add this import
 } from "lucide-react"
+import { useNavigate } from "react-router-dom" // Add this import
 
 const DashboardLayout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate() // Add this
 
   const navigation = [
     { name: "Overview", icon: LayoutDashboard, href: "/dashboard" },
@@ -41,6 +44,11 @@ const DashboardLayout = () => {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
+
+  const handleLogout = () => {
+    // Here you would typically clear any authentication tokens/state
+    navigate("/login")
+  }
 
   return (
     <div className="min-h-screen bg-black text-slate-50 flex">
@@ -149,6 +157,16 @@ const DashboardLayout = () => {
               <Link to="/dashboard/share" className="p-2 text-slate-400 hover:text-cyan-400 transition-colors">
                 <Share2 className="w-6 h-6" />
               </Link>
+
+              {/* Logout Button */}
+              <button
+                onClick={handleLogout}
+                className="p-2 text-red-400 hover:text-red-300 transition-colors flex items-center gap-1"
+                title="Logout"
+              >
+                <LogOut className="w-6 h-6" />
+                {!isSidebarCollapsed && <span className="sr-only md:not-sr-only md:hidden lg:inline-block">Logout</span>}
+              </button>
             </div>
           </div>
         </div>
