@@ -1,5 +1,6 @@
 "use client"
 import { CreditCard, Download } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const BillingSettings = () => {
   const transactions = [
@@ -25,13 +26,13 @@ const BillingSettings = () => {
               <p className="text-slate-200 font-medium">Visa ending in 4242</p>
               <p className="text-slate-400 text-sm">Expires 12/2024</p>
             </div>
-            <button className="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded text-white text-sm transition-colors">
+            <Link to="/dashboard/redeem" className="px-3 py-1 bg-slate-700 hover:bg-slate-600 rounded text-white text-sm transition-colors">
               Update
-            </button>
+            </Link>
           </div>
-          <button className="px-4 py-2 bg-gradient-to-r from-cyan-400 to-violet-500 rounded-md text-white font-medium hover:from-cyan-500 hover:to-violet-600 transition-colors">
+          <Link to="/dashboard/redeem" className="inline-block px-4 py-2 bg-gradient-to-r from-cyan-400 to-violet-500 rounded-md text-white font-medium hover:from-cyan-500 hover:to-violet-600 transition-colors">
             Add New Payment Method
-          </button>
+          </Link>
         </div>
       </div>
       <div className="group relative">

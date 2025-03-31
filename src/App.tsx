@@ -26,6 +26,7 @@ import SupportSettings from "./components/settings/SupportSettings"
 import Repository from "./components/Repository"
 import Registration from "./components/Registration"
 import PDFViewer from "./components/PDFViewer"
+import RedeemPage from "./components/Reedeempage"
 
 const App = () => {
   return (
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="share" element={<SharePage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="repository" element={<Repository />} />
+          <Route path="redeem" element={<RedeemPage />} />
         </Route>
         <Route path="/terms.pdf" element={<PDFViewer url="/terms.pdf" />} />
         <Route path="/privacy.pdf" element={<PDFViewer url="/privacy.pdf" />} />
