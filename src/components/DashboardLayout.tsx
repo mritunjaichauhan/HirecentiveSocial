@@ -75,28 +75,30 @@ const DashboardLayout = () => {
       >
         <div className="h-full flex flex-col">
           {/* Logo and collapse button */}
-          <div className="h-16 p-4 flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800/80">
-            <Link to="/dashboard" className="flex items-center group relative">
-              <div className="relative">
-                {!isSidebarCollapsed && (
-                  <div className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 text-transparent bg-clip-text">
-                    Hirecentive
-                  </div>
-                )}
-                {isSidebarCollapsed && (
-                  <div className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 text-transparent bg-clip-text">
-                    H
-                  </div>
-                )}
-                <div className="absolute -bottom-0.5 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-              </div>
-            </Link>
-            <button
-              onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-              className="p-2 rounded-full bg-slate-800 text-cyan-400 hover:bg-slate-700 hover:text-fuchsia-400 transition-colors"
-            >
-              {isSidebarCollapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
-            </button>
+          <div className="h-16 flex items-center bg-gradient-to-r from-slate-900 to-slate-800/80">
+            <div className="w-full flex items-center justify-between px-2">
+              <Link to="/dashboard" className="flex items-center group relative">
+                <div className="relative">
+                  {!isSidebarCollapsed && (
+                    <div className="text-lg font-bold bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 text-transparent bg-clip-text whitespace-nowrap">
+                      Hirecentive Social
+                    </div>
+                  )}
+                  {isSidebarCollapsed && (
+                    <div className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 text-transparent bg-clip-text pl-0.5">
+                      HC
+                    </div>
+                  )}
+                  <div className="absolute -bottom-0.5 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                </div>
+              </Link>
+              <button
+                onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+                className="p-1.5 rounded-full bg-slate-800 text-cyan-400 hover:bg-slate-700 hover:text-fuchsia-400 transition-colors flex-shrink-0 ml-3"
+              >
+                {isSidebarCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+              </button>
+            </div>
           </div>
 
           {/* Navigation */}
@@ -166,8 +168,8 @@ const DashboardLayout = () => {
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 relative">
             <div className="flex items-center">
               <Link to="/dashboard" className="flex items-center md:hidden">
-                <div className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 text-transparent bg-clip-text">
-                  Hirecentive
+                <div className="text-lg font-bold bg-gradient-to-r from-cyan-400 via-fuchsia-500 to-amber-400 text-transparent bg-clip-text whitespace-nowrap">
+                  Hirecentive Social
                 </div>
               </Link>
               <Link 
